@@ -1,4 +1,4 @@
-# ☕ Coffee API - NestJS
+## ☕ Coffee API - NestJS
 
 API desenvolvida com [NestJS](https://nestjs.com/) para gerenciar um catálogo de cafés. Permite listar, criar e consultar detalhes de cafés armazenados em memória (mock data).
 
@@ -22,26 +22,21 @@ src/
 ├── dto/
 │ └── create-coffee.dto.ts # DTO com validações
 
-yaml
-Copiar código
-
----
 
 ## 🔧 Instalação
 
 ```bash
 # Clonar o repositório
-git clone https://github.com/seu-usuario/coffee-api-nest.git
+  git clone https://github.com/seu-usuario/coffee-api-nest.git
 
 # Entrar na pasta
-cd coffee-api-nest
+  cd coffee-api-nest
 
 # Instalar as dependências
-npm install
+  npm install
 ▶️ Executar o projeto
-bash
-Copiar código
-npm run start:dev
+  npm run start:dev
+
 O servidor estará disponível em: http://localhost:3000
 
 📦 Endpoints
@@ -52,8 +47,6 @@ Lista todos os cafés cadastrados.
 Cria um novo café.
 
 📤 Corpo da requisição (JSON):
-json
-Copiar código
 {
   "nome": "Encanto",
   "tipo": "Suave",
@@ -64,8 +57,6 @@ Copiar código
   "tags": ["floral", "frutas vermelhas", "suave"]
 }
 📥 Resposta esperada (201):
-json
-Copiar código
 {
   "message": "Café criado com sucesso",
   "cafe": {
@@ -81,26 +72,16 @@ Copiar código
 ⚠️ Os campos nome, tipo e id são obrigatórios. Caso estejam ausentes, será retornado erro 400.
 
 ✅ GET /coffees/:id/detalhes
-Retorna os detalhes de um café pelo id.
+  Retorna os detalhes de um café pelo id.
 
 📘 Validação com class-validator
-Utilizamos o class-validator para garantir que os campos obrigatórios estejam presentes e válidos:
+  Utilizamos o class-validator para garantir que os campos obrigatórios estejam presentes e válidos:
+  
+  @IsString(), @IsNotEmpty() para nome, tipo e id
+  
+  @IsNumber() e @IsOptional() para quantidade e preco
+  
+  @IsArray() para tags
 
-@IsString(), @IsNotEmpty() para nome, tipo e id
-
-@IsNumber() e @IsOptional() para quantidade e preco
-
-@IsArray() para tags
-
-🧪 Testando com curl
-bash
-Copiar código
-curl -X POST http://localhost:3000/coffee-create \
--H "Content-Type: application/json" \
--d '{
-  "nome": "Encanto",
-  "tipo": "Suave",
-  "id": "30"
-}'
 📝 Licença
 Projeto desenvolvido para fins educacionais com NestJS ❤️
