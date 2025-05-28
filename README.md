@@ -15,13 +15,14 @@ API desenvolvida com [NestJS](https://nestjs.com/) para gerenciar um catálogo d
 
 ## 📁 Estrutura de Pastas
 
-src/
-├── app.controller.ts # Controlador principal
-├── app.service.ts # Lógica de negócio
-├── app.module.ts # Módulo raiz
-├── dto/
+src/ <br>
+├── app.controller.ts # Controlador principal <br>
+├── app.service.ts # Lógica de negócio <br>
+├── app.module.ts # Módulo raiz <br>
+├── dto/ <br>
 │ └── create-coffee.dto.ts # DTO com validações
 
+---
 
 ## 🔧 Instalação
 
