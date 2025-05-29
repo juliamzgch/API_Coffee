@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Param, Body, HttpCode, HttpStatus } from '@nestjs/common';
+import { Controller, Get, Post, Param, Body, HttpCode, HttpStatus, Query } from '@nestjs/common';
 import { AppService } from './app.service';
 import { CreateCoffeeDto } from './dto/create-coffee.dto';
 
@@ -6,10 +6,10 @@ import { CreateCoffeeDto } from './dto/create-coffee.dto';
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @Get('/coffees')
-  getCoffees() {
-    return this.appService.getCoffees();
-  }
+  //@Get('/coffees')
+  //getCoffees() {
+    //return this.appService.getCoffees();
+  //}
 
   @Post('/coffee-create')
   @HttpCode(HttpStatus.CREATED)
@@ -21,4 +21,15 @@ export class AppController {
   getCoffeeDetalhes(@Param('id') id: string) {
     return this.appService.getCoffeeDetalhes(id);
   }
+
+  //pesquisa por data
+  //usando query
+  //query aumenta o url, mas nao o endpoint
+  @Get('coffees')
+  getCoffeesByDate(@Query('start') start: string, @Query('end') end: string) {
+    const startDate = new Date(start);
+    const endDate = new Date(end);
+    return this.appService.getCoffeePesquisaData(startDate, endDate);
+  }
+
 }

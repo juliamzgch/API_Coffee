@@ -1,4 +1,4 @@
-import { IsString, IsNotEmpty, IsOptional, IsNumber, IsArray } from 'class-validator';
+import { IsString, IsNotEmpty, IsOptional, IsNumber, IsArray, IsDateString } from 'class-validator';
 
 export class CreateCoffeeDto {
   @IsString()
@@ -29,4 +29,12 @@ export class CreateCoffeeDto {
   @IsArray()
   @IsString({ each: true })
   tags?: string[];
+
+  @IsDateString()
+  @IsNotEmpty()
+  start_date: string;
+
+  @IsDateString()
+  @IsNotEmpty()
+  end_date: string;
 }

@@ -1,10 +1,21 @@
 import { Injectable, BadRequestException } from '@nestjs/common';
 import { CreateCoffeeDto } from './dto/create-coffee.dto';
 
-export interface Coffee extends CreateCoffeeDto {}
+export interface Coffee {
+  nome: string;
+  tipo: string;
+  id: string;
+  quantidade?: number;
+  preco?: number;
+  descricao?: string;
+  tags?: string[];
+  start_date: Date;
+  end_date: Date;
+}
 
 @Injectable()
 export class AppService {
+
   private coffees: Coffee[] = [
     {
       nome: 'Paraíso',
@@ -14,6 +25,8 @@ export class AppService {
       id: '22',
       descricao: 'Café encorpado com notas intensas de cacau e aroma marcante.',
       tags: ['intenso', 'cacau', 'tradicional'],
+      start_date: new Date('2025-12-01'),
+      end_date: new Date('2025-12-02'),
     },
   ];
 
@@ -21,21 +34,37 @@ export class AppService {
     return this.coffees;
   }
 
-  createCoffee(coffee: CreateCoffeeDto): { message: string; cafe: Coffee } {
-    const exists = this.coffees.find((c) => c.nome === coffee.nome || c.id === coffee.id);
+  createCoffee(coffeeDto: CreateCoffeeDto) {
+    const existCoffee = this.coffees.find(
+      (c) => c.nome === coffeeDto.nome || c.id === coffeeDto.id,
+    );
 
-    if (exists) {
+    if (existCoffee) {
       throw new BadRequestException('Café já existe');
     }
 
-    this.coffees.push(coffee);
+    const newCoffee: Coffee = {
+      ...coffeeDto,
+      start_date: new Date(coffeeDto.start_date),
+      end_date: new Date(coffeeDto.end_date),
+    };
+
+    this.coffees.push(newCoffee);
+
     return {
       message: 'Café criado com sucesso',
-      cafe: coffee,
-    };
-  }
+      cafe: newCoffee,
+      };
+    }
 
   getCoffeeDetalhes(id: string): Coffee | undefined {
     return this.coffees.find((coffee) => coffee.id === id);
   }
+
+  getCoffeePesquisaData(start_date: Date, end_date: Date) {
+    return this.coffees.filter((coffee) =>
+      coffee.start_date <= end_date && coffee.end_date >= start_date
+    );
+  }
+
 }
