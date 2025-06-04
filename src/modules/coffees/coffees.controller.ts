@@ -1,10 +1,10 @@
 import { Controller, Get, Post, Param, Body, HttpCode, HttpStatus, Query } from '@nestjs/common';
-import { AppService } from './app.service';
-import { CreateCoffeeDto } from './dto/create-coffee.dto';
+import { CoffeeService } from './coffees.service';
+import { CreateCoffeeDto } from '../../dto/create-coffee.dto';
 
 @Controller()
-export class AppController {
-  constructor(private readonly appService: AppService) {}
+export class CoffeeController {
+  constructor(private readonly appService: CoffeeService) {}
 
   //@Get('/coffees')
   //getCoffees() {

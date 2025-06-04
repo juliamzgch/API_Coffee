@@ -1,5 +1,5 @@
 import { Injectable, BadRequestException } from '@nestjs/common';
-import { CreateCoffeeDto } from './dto/create-coffee.dto';
+import { CreateCoffeeDto } from '../../dto/create-coffee.dto';
 
 export interface Coffee {
   nome: string;
@@ -14,7 +14,7 @@ export interface Coffee {
 }
 
 @Injectable()
-export class AppService {
+export class CoffeeService {
 
   private coffees: Coffee[] = [
     {
