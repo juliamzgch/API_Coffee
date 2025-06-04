@@ -24,8 +24,8 @@ export class AppController {
 
   //pesquisa por data
   //usando query
-  //query aumenta o url, mas nao o endpoint
-  @Get('coffees')
+  //query aumenta o url, mas não o endpoint
+  @Get('/coffees')
   getCoffeesByDate(@Query('start') start: string, @Query('end') end: string) {
     const startDate = new Date(start);
     const endDate = new Date(end);
