@@ -6,7 +6,6 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../generated/prisma"
 }
 
 datasource db {
@@ -14,22 +13,23 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+
+model Tag {
+  id    Int    @id @default(autoincrement())
+  nome  String @unique
+  cafes Cafe[] @relation("CafeTags")
+}
+
 model Cafe {
   id          Int     @id @default(autoincrement())
   nome        String
   tipo        String
   preco       Float
-  descricao   String
-  tags        TagCafe[]
+  descricao   String?
+  tags        Tag[]   @relation("CafeTags")
   itensPedido ItemPedido[]
 }
 
-model TagCafe {
-  id          Int     @id @default(autoincrement())
-  nome        String
-  cafeId      Int 
-  cafe        Cafe    @relation(fields: [cafeId], references: [id])
-}
 
 model ItemPedido {
   id              Int     @id @default(autoincrement())
